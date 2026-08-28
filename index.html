@@ -677,7 +677,9 @@
   var state;
   try { state = JSON.parse(stateEl.textContent) || {}; } catch(e){ state = {}; }
   if(!state.bulletin) state.bulletin = JSON.parse(JSON.stringify(DEFAULTS.bulletin));
-  ['sermons','news','photos','family'].forEach(function(k){ if(!Array.isArray(state[k])) state[k] = []; });
+  ['sermons','news','photos','family'].forEach(function(k){
+    if(!Array.isArray(state[k])) state[k] = JSON.parse(JSON.stringify(DEFAULTS[k] || []));
+  });
   if(!Array.isArray(state.bulletin.notices)) state.bulletin.notices = [];
   if(!Array.isArray(state.bulletin.spklines)) state.bulletin.spklines = [];
 
